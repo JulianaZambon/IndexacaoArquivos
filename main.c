@@ -15,17 +15,17 @@ int main() {
 
     /*Executa programa até que usuário entre com uma linha vazia*/
     while ((fgets(linha, sizeof(linha), stdin)) != NULL) {
-        
+
         /*Armazena strings necessárias para a 
         execução do comando inserido pelo usuário*/
-        aplicacao = strtok(linha, " \n");
+        aplicacao = strtok(linha, " ");
         if(strcmp(aplicacao, "insere") && strcmp(aplicacao, "procura")) /*Se a aplicação não for inserção ou busca*/
             break;
+
         nomeBase = strtok(NULL, " \n");
         textoPrefixo = strtok(NULL, " \n");
 
             if (strcmp(aplicacao, "insere") == 0) {
-
                 /*Se a aplicação for inserção, usa o arquivo base (ou cria um novo, 
                 caso necessário) correspondente ao nome fornecido pelo usuário na 
                 entrada e insere nele as palavras disponíveis no arquivo texto. 
@@ -62,7 +62,6 @@ int main() {
                 fprintf(stderr, "Formato de entrada requerido para busca:\nprocura arquivoBase prefixo\n");
             }
         }
-    
     /*Libera memória alocada para a estrutura trie*/
     destroiTrie(raizTrie);
     return 0;

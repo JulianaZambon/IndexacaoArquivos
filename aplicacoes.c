@@ -23,6 +23,7 @@ void insereTextoNaTrie(FILE *base, FILE *texto, char *nomeArqTexto, nodo *raiz) 
 
     char armazenaPalavra[1024];
     escreveTrieNaBase(base, raiz, armazenaPalavra, 0);
+    destroiTrie(raiz);
 }
 
 /*Função auxiliar para escrever trie no 

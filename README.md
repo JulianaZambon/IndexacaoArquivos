@@ -10,8 +10,8 @@ Equipe:
 
 ### Função Principal (main.c)
 Contém as estruturas necessárias para a execução das aplicações -- tais como nomes de arquivos e prefixos -- informadas na stdin.<br>
-Imprime mensagens na stderr caso fornecida chamada de função incorreta, ou não encontre algum dos arquivos necessários para a aplicação que se deseja executar (tais como o arquivo texto, no caso da inserção, ou o arquivo base, no caso da busca).<br>
-Executa o programa até que se depare com linha da stdin vazia.
+Em caso de chamada de função incorreta ou se algum dos arquivos essenciais para a aplicação não for encontrado (como o arquivo de texto para operações de inserção ou o arquivo base para operações de busca), são impressas mensagens na stderr.<br>
+O programa continua a execução até encontrar uma linha vazia na stdin ou quando a aplicação não se refere a operações de inserção ou busca.
 
 ### Base de Dados (trie.c e trie.h)
 Arquivos texto contém palavras que são organizadas e inseridas em uma estrutura trie. Independente de quantas chamadas de inserção forem feitas (e quantos arquivos diferentes forem disponibilizados), todos serão inseridos em uma mesma estrutura trie, implementada através das funções contidas em trie.c e trie.h.<br>

@@ -12,15 +12,16 @@ void insereTextoNaTrie(FILE *base, FILE *texto, char *nomeArqTexto, nodo *raiz) 
 
     /*Lê linha por linha do arquivo 
     e insere suas palavras na trie*/
-    while (fgets(linha, sizeof(linha), texto) != NULL) {
-        palavra = strtok(linha, " \t\n"); 
+    while ((fgets(linha, sizeof(linha), texto)) != NULL) {
+        palavra = strtok(linha, " \n");
 
-        while (palavra) {
+        while (palavra != NULL) {
             insereChave(raiz, palavra, nomeArqTexto);
-            palavra = strtok(NULL, " \t\n");
+            palavra = strtok(NULL, " \n");
         }
     }
 
+    /*Escreve a trie na base de dados*/
     char armazenaPalavra[1024];
     escreveTrieNaBase(base, raiz, armazenaPalavra, 0);
     destroiTrie(raiz);

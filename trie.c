@@ -3,6 +3,8 @@
 #include <string.h>
 #include "trie.h"
 
+#define MAX_FILENAME_LENGTH 256
+
 /*Inicializa uma nova trie alocando memória para 
 o nodo raiz e definindo um filho para cada letra 
 inicial possível das palavras.*/
@@ -53,18 +55,32 @@ void insereChave(nodo *raiz, char *chave, char *nomeArqTexto) {
             /* Se for o último caractere da palavra, adiciona o nome do arquivo */
             if (i == tam - 1) {
                 if (atual->nomeArquivo == NULL) {
-                    atual->nomeArquivo = (char *)malloc(strlen(nomeArqTexto));
-                    sprintf(atual->nomeArquivo, "[%s]", nomeArqTexto);
-                
+                    size_t length = strlen(nomeArqTexto);
+
+                    // Check if it fits in the buffer
+                    if (length < MAX_FILENAME_LENGTH - 3) { 
+                        atual->nomeArquivo = (char *)malloc(length + 3);  
+                        if (atual->nomeArquivo != NULL) {
+                            sprintf(atual->nomeArquivo, "[%s]", nomeArqTexto);
+                        } else {
+                            fprintf(stderr, "Falha na alocação de memória para nomeArquivo.\n");
+                        }
+                    } else {
+                        fprintf(stderr, "O nome do arquivo é muito longo para ser armazenado.\n");
+                    }
                 } else {
                     /* Verifica se o nome do arquivo já está na lista */
                     if (!contemNomeArquivo(atual->nomeArquivo, nomeArqTexto)) {
                         size_t tamNomeArquivo = strlen(atual->nomeArquivo);
-                        size_t novoTam = tamNomeArquivo + strlen(nomeArqTexto);
+                        size_t novoTam = tamNomeArquivo + strlen(nomeArqTexto) + 3; // +3 para "[", "]" e "\0"
                         atual->nomeArquivo = (char *)realloc(atual->nomeArquivo, novoTam);
-                        strcat(atual->nomeArquivo, "[");
-                        strcat(atual->nomeArquivo, nomeArqTexto);
-                        strcat(atual->nomeArquivo, "]");
+                        if (atual->nomeArquivo != NULL) {
+                            strcat(atual->nomeArquivo, "[");
+                            strcat(atual->nomeArquivo, nomeArqTexto);
+                            strcat(atual->nomeArquivo, "]");
+                        } else {
+                            fprintf(stderr, "Falha na realocação de memória para nomeArquivo.\n");
+                        }
                     }
                 }
             }

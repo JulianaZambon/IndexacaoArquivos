@@ -14,7 +14,7 @@ int main() {
     nodo *raizTrie = inicializaTrie();
 
     /*Executa programa até que usuário entre com uma linha vazia*/
-    while ((fgets(linha, sizeof(linha), stdin)) != NULL){
+    while ((fgets(linha, sizeof(linha), stdin)) != NULL) {
         
         /*Armazena strings necessárias para a 
         execução do comando inserido pelo usuário*/
@@ -22,7 +22,6 @@ int main() {
         nomeBase = strtok(NULL, " \n");
         textoPrefixo = strtok(NULL, " \n");
 
-        if (aplicacao && nomeBase && textoPrefixo) {
             if (strcmp(aplicacao, "insere") == 0) {
 
                 /*Se a aplicação for inserção, usa o arquivo base (ou cria um novo, 
@@ -52,8 +51,8 @@ int main() {
                 if (base)
                     procuraPalavrasPorPrefixo(base, textoPrefixo);
                     
-                else
-                    fprintf(stderr, "Arquivo base não encontrado.\n");
+                //else
+                    //fprintf(stderr, "Arquivo base não encontrado.\n");
                 
                 fclose(base);
 
@@ -64,7 +63,6 @@ int main() {
                 fprintf(stderr, "Formato de entrada requerido para busca:\nprocura arquivoBase prefixo\n");
             }
         }
-    }
     
     /*Libera memória alocada para a estrutura trie*/
     destroiTrie(raizTrie);

@@ -19,6 +19,8 @@ int main() {
         /*Armazena strings necessárias para a 
         execução do comando inserido pelo usuário*/
         aplicacao = strtok(linha, " \n");
+        if(strcmp(aplicacao, "insere") && strcmp(aplicacao, "procura")) /*Se a aplicação não for inserção ou busca*/
+            break;
         nomeBase = strtok(NULL, " \n");
         textoPrefixo = strtok(NULL, " \n");
 
@@ -50,9 +52,6 @@ int main() {
 
                 if (base)
                     procuraPalavrasPorPrefixo(base, textoPrefixo);
-                    
-                //else
-                    //fprintf(stderr, "Arquivo base não encontrado.\n");
                 
                 fclose(base);
 
